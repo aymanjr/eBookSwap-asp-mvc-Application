@@ -17,7 +17,9 @@ namespace ebookSwapApllication.Models
         public string UserAdress { get; set; } = String.Empty;
         public string UserDateCreating { get; set; } = String.Empty;
 
+        // relationships 
 
+        public List<Book>? Books { get; set; } 
 
 
 

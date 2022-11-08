@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ebookSwapApllication.Models
 {
@@ -10,7 +11,7 @@ namespace ebookSwapApllication.Models
         public string BookISBN13 { get; set; } = String.Empty;
         public string BookLanguage { get; set; } = String.Empty;
         public string BookNumPages { get; set; } = String.Empty;
-        public DateTime BookPublicationDate { get; set; } 
+        public DateTime BookPublicationDate { get; set; }
         public string BookPublisherID { get; set; } = String.Empty;
         public string BookAuthor { get; set; } = String.Empty;
         public string BookCategory { get; set; } = String.Empty;
@@ -20,5 +21,10 @@ namespace ebookSwapApllication.Models
         public string BookImagePath { get; set; } = String.Empty;
 
 
+        //relationships 
+
+        public int UserId { get; set; }
+        [ForeignKey("UserId")]
+        public User? User { get; set; }  
     }
 }

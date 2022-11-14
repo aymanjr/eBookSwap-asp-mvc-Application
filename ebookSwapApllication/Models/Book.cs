@@ -25,6 +25,7 @@ namespace ebookSwapApllication.Models
 
         public int UserId { get; set; }
         [ForeignKey("UserId")]
+
         public User? User { get; set; }  
     }
 }

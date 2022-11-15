@@ -15,7 +15,7 @@ namespace ebookSwapApllication.Controllers
         public IActionResult Index()
         {
             var data = _context.Users.ToList();
-            return View();
+            return View(data);
         }
     }
 }

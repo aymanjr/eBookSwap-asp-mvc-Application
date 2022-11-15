@@ -1,5 +1,6 @@
 ﻿using ebookSwapApllication.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ebookSwapApllication.Controllers
 {
@@ -11,8 +12,9 @@ namespace ebookSwapApllication.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var data = await _context.Books.ToListAsync();
             return View();
         }
     }

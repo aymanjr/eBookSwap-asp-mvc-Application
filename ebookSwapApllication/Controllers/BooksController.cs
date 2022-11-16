@@ -14,8 +14,8 @@ namespace ebookSwapApllication.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var data = await _context.Books.ToListAsync();
-            return View();
+            var allbooks = await _context.Books.ToListAsync();
+            return View(allbooks);
         }
     }
 }

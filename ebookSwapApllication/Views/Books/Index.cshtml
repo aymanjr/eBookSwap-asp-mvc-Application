@@ -1,7 +1,7 @@
-﻿@model IEnumerable<User>
+﻿@model IEnumerable<Book>
 
 @{
-    ViewData["Title"] = "liste of Users";
+    ViewData["Title"] = "liste of Books";
 }
 
 <div class="row">
@@ -9,11 +9,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(model => model.UserName)</th>
-                    <th>@Html.DisplayNameFor(model => model.UserFullName)</th>
-                    <th>@Html.DisplayNameFor(model => model.UserEmail)</th>
-                    <th>@Html.DisplayNameFor(model => model.Userphonenumber)</th>
-                    <th>@Html.DisplayNameFor(model => model.UserCity)</th>
+                    <th>@Html.DisplayNameFor(model => model.BookImagePath)</th>
+                    <th>@Html.DisplayNameFor(model => model.BookTitle)</th>
+                    <th>@Html.DisplayNameFor(model => model.BookCategory)</th>
+                    <th>@Html.DisplayNameFor(model => model.BookCondition)</th>
+                    <th>@Html.DisplayNameFor(model => model.BookLanguage)</th>
                     <th>Actions</th>
 
                 </tr>
@@ -23,22 +23,22 @@
                 {
                     <tr>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelitem => item.UserName)
-                        </td>
-                        <td class="align-middle">
-                            @Html.DisplayFor(modelitem => item.UserFullName)
+                            <img class="rounded-circle" src="@item.BookImagePath" style="max-width: 150px" />
 
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelitem => item.UserEmail)
+                            @Html.DisplayFor(modelitem => item.BookTitle)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelitem => item.BookCategory)
 
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelitem => item.Userphonenumber)
+                            @Html.DisplayFor(modelitem => item.BookCondition)
 
                         </td>
                         <td class="align-middle">
-                            @Html.DisplayFor(modelitem => item.UserCity)
+                            @Html.DisplayFor(modelitem => item.BookLanguage)
 
                         </td>
                         <td class="align-middle">
@@ -52,7 +52,7 @@
                     </tr>
                 }
             </tbody>
-            
+
         </table>
 
     </div>

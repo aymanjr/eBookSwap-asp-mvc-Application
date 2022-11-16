@@ -5,32 +5,11 @@
 }
 
 <div class="row">
-    <div class="col-md-8 offset-md-2">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.BookImagePath)</th>
-                    <th>@Html.DisplayNameFor(model => model.BookTitle)</th>
-                    <th>@Html.DisplayNameFor(model => model.BookCategory)</th>
-                    <th>@Html.DisplayNameFor(model => model.BookCondition)</th>
-                    <th>@Html.DisplayNameFor(model => model.BookLanguage)</th>
-                    <th>Actions</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td class="align-middle">
-                            <img class="rounded-circle" src="@item.BookImagePath" style="max-width: 150px" />
-
-                        </td>
-                        <td class="align-middle">
-                            @Html.DisplayFor(modelitem => item.BookTitle)
-                        </td>
-                        <td class="align-middle">
-                            @Html.DisplayFor(modelitem => item.BookCategory)
+  
+    @foreach (var item in Model)
+    {
+        
+    }
 
 </div>
 

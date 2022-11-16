@@ -14,7 +14,7 @@ namespace ebookSwapApllication.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var allbooks = await _context.Books.ToListAsync();
+            var allbooks = await _context.Books.Include(n=>n.User).ToListAsync();
             return View(allbooks);
         }
     }

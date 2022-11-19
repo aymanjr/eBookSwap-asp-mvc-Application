@@ -16,7 +16,12 @@ namespace ebookSwapApllication.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _service.Getall();
-            return View(data); 
+            return View(data);
+        }
+
+        public  ActionResult Create()
+        {
+            return View();
         }
     }
 }

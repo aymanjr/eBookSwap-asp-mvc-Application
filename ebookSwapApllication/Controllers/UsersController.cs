@@ -1,21 +1,22 @@
 ﻿using ebookSwapApllication.Data;
+using ebookSwapApllication.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ebookSwapApllication.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IUsersService _service;
 
-        public UsersController(AppDbContext context)
+        public UsersController(IUsersService service)
         {
-            _context = context;
+            _service = service;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var data = _context.Users.ToList();
-            return View(data);
+            var data = await _service.Getall();
+            return View(data); 
         }
     }
 }

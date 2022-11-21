@@ -13,7 +13,8 @@ namespace ebookSwapApllication.Data.Services
         }
         public void Add(User user)
         {
-            throw new NotImplementedException();
+           _context.Users.Add(user);
+           _context.SaveChanges();
         }
 
         public void Delete(int id)

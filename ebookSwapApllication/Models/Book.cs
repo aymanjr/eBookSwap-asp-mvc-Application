@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ebookSwapApllication.Models
@@ -18,8 +19,7 @@ namespace ebookSwapApllication.Models
         public string BookDescription { get; set; } = String.Empty;
         public string BookCondition { get; set; } = String.Empty;
         public string BookNotes { get; set; } = String.Empty;
-        public string BookImagePath { get; set; } = String.Empty;
-
+        public IFormFile? BookImagePath { get; set; }
 
         //relationships 
 

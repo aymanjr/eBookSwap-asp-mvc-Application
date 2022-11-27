@@ -24,43 +24,13 @@
 </head>
 <body>
     <header>
-      @*  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Books" asp-action="Index">ebook</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="navbar-nav flex-grow-1">
-                            <a class="nav-link text-dark" asp-controller="Books" asp-action="Index"><i class="badge-info bi-book"></i>Books</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="button"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="bi bi-gear"></i>Management
-                        </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-bs-toggle="dropdown">
-                                <a class="dropdown-item" asp-controller="Users" asp-action="Index"><i class="bi bi-camera-reels"></i>Books</a>
-                                <a class="dropdown-item" asp-controller="Books" asp-action="Index"><i class="bi bi-person-square"></i>Users</a>
-                            </div>
-                        </li>
-                        
-                        <form class="form-inline my-2 my-1g-0" asp-controller="Books" asp-action="Filter" style="padding-right: 25px;display:flex">
-                            <input name="searchString" type="text" class="form-control" placeholder="Search for a Book..." />
-                            <button class="btn btn-outline-success my-2 my-sm-" type="submit"><i class="bi bi-search"></i></button>
-
-                        </form>
-
-                    </ul>
-                </div>
-            </div>
-        </nav>*@
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Books" asp-action="Index">ebook</a>
+
                 <a class="nav-link text-dark" asp-controller="Books" asp-action="Index"><i class="badge-info bi-book"></i>Books</a>
+                <a class="nav-link text-dark" asp-controller="Users" asp-action="Index"><i class="glyphicon glyphicon-user"></i>Users</a>
+
                 <form class="d-flex input-group w-auto" asp-controller="Books" asp-action="Filter">
                     <input type="search"
                            class="form-control square"

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +17,8 @@ namespace ebookSwapApllication.Models
         public string BookPublisherID { get; set; } = String.Empty;
         public string BookAuthor { get; set; } = String.Empty;
         public string BookCategory { get; set; } = String.Empty;
+        [NotMapped]
+        public SelectList? BookCategoryList { get; set; }
         public string BookDescription { get; set; } = String.Empty;
         public string BookCondition { get; set; } = String.Empty;
         public string BookNotes { get; set; } = String.Empty;

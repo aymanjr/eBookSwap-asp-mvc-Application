@@ -1,6 +1,7 @@
 ﻿using ebookSwapApllication.Data;
 using ebookSwapApllication.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace ebookSwapApllication.Controllers
@@ -42,7 +43,12 @@ namespace ebookSwapApllication.Controllers
         // GET: Books/Create
         public IActionResult Create()
         {
-            return View();
+            Book book = new Book();
+            book.BookCategoryList = new SelectList(_context.Books.ToList(), "BookCategory", "BookCategory");
+
+
+
+            return View(book);
         }
 
         //[HttpPost]

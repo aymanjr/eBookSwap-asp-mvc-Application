@@ -8,11 +8,9 @@ namespace ebookSwapApllication.Controllers
     public class BooksController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly IWebHostEnvironment _env;
-        public BooksController(AppDbContext context, IWebHostEnvironment env)
+        public BooksController(AppDbContext context)
         {
             _context = context;
-            _env = env;
         }
         public async Task<IActionResult> Index()
         {
@@ -47,17 +45,17 @@ namespace ebookSwapApllication.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,UserName,UserFullName,UserEmail,UserPassword,Userphonenumber,UserCity,UserCountry,UserAdress,UserDateCreating")] Book book)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(book);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(book);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("UserId,UserName,UserFullName,UserEmail,UserPassword,Userphonenumber,UserCity,UserCountry,UserAdress,UserDateCreating")] Book book)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(book);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(book);
+        //}
     }
 }

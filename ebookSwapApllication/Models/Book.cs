@@ -19,7 +19,7 @@ namespace ebookSwapApllication.Models
         public string BookDescription { get; set; } = String.Empty;
         public string BookCondition { get; set; } = String.Empty;
         public string BookNotes { get; set; } = String.Empty;
-        public IFormFile? BookImagePath { get; set; }
+        public string BookImagePath { get; set; } = String.Empty;
 
         //relationships 
 

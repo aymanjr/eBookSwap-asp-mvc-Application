@@ -61,13 +61,14 @@ namespace ebookSwapApllication.Controllers
 
             ViewBag.Catgorylist = catgorylist;
 
+           
 
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookTitle","BookLanguage","BookAuthor","BookCondition","UserId","BookNotes","BookCategory")] Book book)
+        public async Task<IActionResult> Create([Bind("BookTitle","BookLanguage","BookAuthor","BookCondition","UserId","BookNotes","BookCategory", "BookISBN13", "BookNumPages", "BookPublicationDate", "BookPublisherID", "BookDescription")] Book book)
         {
             if (ModelState.IsValid)
             {

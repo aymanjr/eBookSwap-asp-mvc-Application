@@ -27,8 +27,56 @@
 
                                 </div>
                             </div>
+                                <div class="row align-items-center pt-4 pb-3">
+                                    <div class="col-md-3 ps-5">
 
-                            <hr class="mx-n3">
+                                        <h6 class="mb-0">Book ISBN (OPTIONAL) :</h6>
+
+                                    </div>
+                                    <div class="col-md-9 pe-5">
+
+                                        <input type="text" asp-for="BookISBN13" class="form-control form-control-lg" />
+
+                                    </div>
+                                </div>
+                                <div class="row align-items-center pt-4 pb-3">
+                                    <div class="col-md-3 ps-5">
+
+                                        <h6 class="mb-0">Book numpages (OPTIONAL) :</h6>
+
+                                    </div>
+                                    <div class="col-md-9 pe-5">
+
+                                        <input type="text" asp-for="BookNumPages" class="form-control form-control-lg" />
+
+                                    </div>
+                                </div>
+                                <div class="row align-items-center pt-4 pb-3">
+                                    <div class="col-md-3 ps-5">
+
+                                        <h6 class="mb-0">Book Publication Date (OPTIONAL) :</h6>
+
+                                    </div>
+                                    <div class="col-md-9 pe-5">
+
+                                        <input type="date" asp-for="BookPublicationDate" class="form-control form-control-lg" />
+
+                                    </div>
+                                </div>
+                                <div class="row align-items-center pt-4 pb-3">
+                                    <div class="col-md-3 ps-5">
+
+                                        <h6 class="mb-0">Book Publisher (OPTIONAL) :</h6>
+
+                                    </div>
+                                    <div class="col-md-9 pe-5">
+
+                                        <input type="text" asp-for="BookPublisherID" class="form-control form-control-lg" />
+
+                                    </div>
+                                </div>
+
+                           
 
                             <div class="row align-items-center py-3">
                                 <div class="col-md-3 ps-5">
@@ -54,18 +102,7 @@
 
                                     </div>
                                 </div>
-                                <div class="row align-items-center py-3">
-                                    <div class="col-md-3 ps-5">
 
-                                        <h6 class="mb-0">Book Condition :</h6>
-
-                                    </div>
-                                    <div class="col-md-9 pe-5">
-
-                                        <input type="text" asp-for="BookCondition" class="form-control form-control-lg" />
-
-                                    </div>
-                                </div>
                                 <div class="row align-items-center py-3">
                                     <div class="col-md-3 ps-5">
 
@@ -77,6 +114,18 @@
                                         <input type="text" asp-for="UserId" class="form-control form-control-lg" />
 
                                     </div>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="BookCondition" asp-for="BookCondition" value="NEW" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        NEW
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="BookCondition" asp-for="BookCondition" value="USED" id="flexRadioDefault2" checked>
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        USED
+                                    </label>
                                 </div>
                                 <div class="row align-items-center py-3">
                                     <div class="col-md-3 ps-5">
@@ -110,12 +159,12 @@
                             <div class="row align-items-center py-3">
                                 <div class="col-md-3 ps-5">
 
-                                    <h6 class="mb-0">Full name</h6>
+                                    <h6 class="mb-0">Book Description (OPTIONAL): </h6>
 
                                 </div>
                                 <div class="col-md-9 pe-5">
 
-                                    <textarea class="form-control" rows="3" placeholder="Message sent to the employer"></textarea>
+                                    <textarea class="form-control" rows="3" asp-for="BookDescription" placeholder="Description of the book from your point of view"></textarea>
 
                                 </div>
                             </div>

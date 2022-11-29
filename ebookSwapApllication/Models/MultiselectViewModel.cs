@@ -3,10 +3,10 @@ using System.ComponentModel;
 
 namespace ebookSwapApllication.Models
 {
-    public class CategoryViewModel
+    public class MultiselectViewModel
     {
-        [DisplayName("Category")]
         public List<SelectListItem> Listofcategories { get; set; }
+
 
     }
 }

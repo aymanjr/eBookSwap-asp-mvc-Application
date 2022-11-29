@@ -43,25 +43,64 @@ namespace ebookSwapApllication.Controllers
         // GET: Books/Create
         public IActionResult Create()
         {
-            Book book = new Book();
-            book.BookCategoryList = new SelectList(_context.Books.ToList(), "BookCategory", "BookCategory");
+            //Book book = new Book();
+            //book.BookCategoryList = new SelectList(_context.Books.ToList(), "BookCategory", "BookCategory");
 
 
+            var catgorylist = (from book in _context.Books select new SelectListItem() {
 
+                Text = book.BookCategory,
+                Value = book.BookCategory.ToString()
+
+            }).ToList();
+            catgorylist.Insert(0, new SelectListItem() { 
+            
+               Text = "--Select--",
+               Value=String.Empty
+            });
+
+            ViewBag.Catgorylist = catgorylist;
+
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("BookTitle","BookLanguage","BookAuthor","BookCondition","UserId","BookNotes","BookCategory")] Book book)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(book);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
             return View(book);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("UserId,UserName,UserFullName,UserEmail,UserPassword,Userphonenumber,UserCity,UserCountry,UserAdress,UserDateCreating")] Book book)
+
+        //[HttpPost] 
+        //public IActionResult Create(CategoryViewModel categoryViewModel,Book book)
         //{
-        //    if (ModelState.IsValid)
+
+        //   var selectedValue = categoryViewModel.Listofcategories;
+
+        //    var newbook = new Book()
         //    {
-        //        _context.Add(book);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(book);
+        //        BookTitle = book.BookTitle,
+        //        BookCondition  = book.BookCondition,
+        //        BookAuthor = book.BookAuthor,
+        //        BookDescription = book.BookDescription,
+        //        BookLanguage =     book.BookLanguage,
+        //        BookNotes = book.BookNotes,
+        //        BookPublisherID = book.BookPublisherID,
+        //        BookNumPages = book.BookNumPages,
+        //        BookCategory = selectedValue.ToString(),
+        //    };
+
+
+        //    return View(categoryViewModel);
+
         //}
     }
 }

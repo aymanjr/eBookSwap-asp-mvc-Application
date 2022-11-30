@@ -6,6 +6,17 @@
 
 <div class="row">
   
+    <form method="get" asp-action="Index">
+        <p>
+            <input type="search" placeholder="search book(any keywords)" value="@ViewData["getbookdetail"]" name="booksearch" />
+            <input type="submit" value="Search" class="btn btn-primary"/>
+            <a asp-action="Index">
+                get all books 
+            </a>
+        </p>
+    </form>
+
+
     @foreach (var item in Model)
     {
         <div class="col-md-4 col-xs-6 col-md-3 border-primary mb-3">

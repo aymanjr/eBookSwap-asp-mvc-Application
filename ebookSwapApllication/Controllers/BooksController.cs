@@ -21,6 +21,25 @@ namespace ebookSwapApllication.Controllers
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Index(string booksearch)
+        {
+
+            ViewData["getbookdetail"] = booksearch;
+
+            var bookquery = from x in _context.Books.Include(n => n.User) select x;
+
+            if (!string.IsNullOrEmpty(booksearch))
+            {
+                bookquery = bookquery.Where(x => x.BookTitle.Contains(booksearch) || x.BookISBN13.Contains(booksearch) || x.BookAuthor.Contains(booksearch) || x.BookCategory.Contains(booksearch) || x.BookLanguage.Contains(booksearch));
+            }
+
+            return View(await bookquery.AsNoTracking().ToListAsync());
+
+
+        }
+
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Books == null)

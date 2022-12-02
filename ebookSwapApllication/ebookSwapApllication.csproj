@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\BookCovers\" />
-    <Folder Include="Views\Main\" />
   </ItemGroup>
 
 </Project>

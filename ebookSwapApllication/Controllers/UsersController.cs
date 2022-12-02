@@ -42,11 +42,7 @@ namespace ebookSwapApllication.Controllers
 
             return View(user);
         }
-        public async Task<IActionResult> Login(string? username,string password)
-        {
 
-            return View();
-        }
 
         // GET: Users/Create
         public IActionResult Create()

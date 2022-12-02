@@ -1,20 +1,17 @@
-﻿@model ebookSwapApllication.Models.LoginSignupViewModel
+﻿@model ebookSwapApllication.Models.User
 
 @{
-    ViewData["Title"] = "Signup";
-    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewData["Title"] = "Create";
 }
 
-<section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
         <div class="row justify-content-center align-items-center h-100">
             <div class="col-12 col-lg-9 col-xl-7">
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                     <div class="card-body p-4 p-md-5">
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
-                        <h6 class="mb-4 pb-2 pb-md-0 mb-md-5">@TempData["successMessage"]</h6>
-
-                        <form method="post" asp-action="Signup"> 
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-4">
@@ -22,6 +19,8 @@
                                     <div class="form-outline">
                                         <input type="text" asp-for="UserFullName" id="fullname" class="form-control form-control-lg" />
                                         <label class="form-label" for="firstName" >Full Name</label>
+                                        <span asp-validation-for="UserFullName" class="text-danger"></span>
+
                                     </div>
 
                                 </div>
@@ -30,6 +29,8 @@
                                     <div class="form-outline">
                                         <input type="text" id="username" asp-for="UserName" class="form-control form-control-lg" />
                                         <label class="form-label" for="lastName">Username</label>
+                                        <span asp-validation-for="UserName" class="text-danger"></span>
+
                                     </div>
 
                                 </div>
@@ -41,6 +42,8 @@
                                     <div class="form-outline datepicker w-100">
                                         <input type="text" asp-for="UserCity" class="form-control form-control-lg" id="birthdayDate" />
                                         <label for="birthdayDate" class="form-label">City </label>
+                                        <span asp-validation-for="UserCity" class="text-danger"></span>
+
                                     </div>
 
                                 </div>
@@ -49,6 +52,8 @@
                                     <div class="form-outline datepicker w-100">
                                         <input type="text" asp-for="UserCountry" class="form-control form-control-lg" id="birthdayDate" />
                                         <label for="birthdayDate" class="form-label">Country</label>
+                                        <span asp-validation-for="UserCountry" class="text-danger"></span>
+
                                     </div>
 
                                 </div>
@@ -61,6 +66,8 @@
                                     <div class="form-outline">
                                         <input type="email" id="emailAddress" asp-for="UserEmail" class="form-control form-control-lg" />
                                         <label class="form-label" for="emailAddress">Email</label>
+                                        <span asp-validation-for="UserEmail" class="text-danger"></span>
+
                                     </div>
 
                                 </div>
@@ -68,7 +75,7 @@
 
                                     <div class="form-outline">
                                         <input type="email" id="emailAddress" asp-for="UserAdress" class="form-control form-control-lg" />
-                                        <label class="form-label" for="emailAddress">Adress</label>
+                                        <label class="form-label" for="emailAddress">Adress (OPTIONAL)</label>
                                     </div>
 
                                 </div>
@@ -77,6 +84,8 @@
                                     <div class="form-outline">
                                         <input type="tel" id="phoneNumber" asp-for="Userphonenumber" class="form-control form-control-lg" />
                                         <label class="form-label" for="phoneNumber">Phone Number</label>
+                                        <span asp-validation-for="Userphonenumber" class="text-danger"></span>
+
                                     </div>
 
                                 </div>
@@ -85,22 +94,19 @@
                                     <div class="form-outline">
                                         <input type="password" id="Password" asp-for="UserPassword" class="form-control form-control-lg" />
                                         <label class="form-label" for="Password">Password</label>
-                                    </div>
+                                        <span asp-validation-for="UserPassword" class="text-danger"></span>
 
+                                    </div>
                                 </div>
-                                <div class="col-md-6 mb-4 pb-2">
-
-                                    <div class="form-outline">
-                                        <input type="password" id="confirmPassword" asp-for="UserConfirmPassword" class="form-control form-control-lg" />
-                                        <label class="form-label" for="Password">Confirm Password</label>
-                                    </div>
-
+                                <div class="form-group" hidden>
+                                    <label asp-for="UserDateCreating" class="control-label" hidden></label>
+                                    <input asp-for="UserDateCreating" class="form-control" hidden value="@DateTime.Now.ToShortDateString()" />
                                 </div>
                             </div>
 
 
                             <div class="mt-4 pt-2">
-                                <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                                <input class="btn btn-primary btn-lg" type="submit" value="Create" />
                             </div>
 
                         </form>
@@ -109,5 +115,9 @@
             </div>
         </div>
     </div>
-</section>
 
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

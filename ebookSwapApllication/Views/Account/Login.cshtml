@@ -3,17 +3,45 @@
 @{
     ViewData["Title"] = "Login";
 }
+<script>
 
+    function Validate() {
+
+        $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("Validate", "Account")',
+                data: {
+                    username: $('#username').val(),
+                    userpassword: $('#userpassword').val()
+                },
+                error: function (result) {
+                    alert("There is a Problem, Try Again!");
+                },
+                success: function (result) {
+                    console.log(result);
+                    if (result.status == true) {
+                        window.location.href = '@Url.Action("Index", "Books")';
+                    }
+                    else {
+                        alert(result.message);
+                    }
+                }
+
+            });
+    }
+
+</script>
 <form method="post" asp-action="Login" asp-controller="Login">
     <!-- Email input -->
     <div class="form-outline mb-4">
-        <input type="text" id="form2Example1" asp-for="UserName" class="form-control" />
+        <input type="text" id="form2Example1" asp-for="UserName" name="username" class="form-control" />
         <label class="form-label" for="form2Example1">Username :</label>
     </div>
 
     <!-- Password input -->
     <div class="form-outline mb-4">
-        <input type="password" id="form2Example2" asp-for="UserPassword" class="form-control" />
+        <input type="password" id="form2Example2" asp-for="UserPassword" name="userpassword" class="form-control" />
         <label class="form-label" for="form2Example2">Password</label>
     </div>
 
@@ -34,7 +62,7 @@
     </div>
 
     <!-- Submit button -->
-    <button type="submit" class="btn btn-primary btn-block mb-4" value="submit">Sign in</button>
+    <button type="submit" class="btn btn-primary btn-block mb-4" value="Login" onclick="Validate()">Sign in</button>
 
     <!-- Register buttons -->
     <div class="text-center">

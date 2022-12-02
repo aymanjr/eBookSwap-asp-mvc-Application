@@ -6,7 +6,7 @@ namespace ebookSwapApllication.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext? _context;
 
         public IActionResult Index()
         {
@@ -74,6 +74,27 @@ namespace ebookSwapApllication.Controllers
                 TempData["errorMessage"] = "Empty form can't be submitted";
             }
             return View();
+        }
+
+        public ActionResult Validate(User user)
+        {
+            var _admin = _context.Users.Where(s => s.UserName == user.UserName);
+            if (_admin.Any())
+            {
+                if (_admin.Where(s => s.UserPassword == user.UserPassword).Any())
+                {
+
+                    return Json(new { status = true, message = "Login Successfull!" });
+                }
+                else
+                {
+                    return Json(new { status = false, message = "Invalid Password!" });
+                }
+            }
+            else
+            {
+                return Json(new { status = false, message = "Invalid Username!" });
+            }
         }
     }
 }

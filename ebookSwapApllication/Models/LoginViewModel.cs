@@ -9,6 +9,7 @@ namespace ebookSwapApllication.Models
         [Display(Name = "UserName")]
         [Required(ErrorMessage = "username is required")]
         public string UserName { get; set; } = String.Empty;
+
         [Display(Name = "Full Name")]
         [Required(ErrorMessage = "FullName is required")]
 

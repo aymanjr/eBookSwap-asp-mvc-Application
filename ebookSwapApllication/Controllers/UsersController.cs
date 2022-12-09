@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ebookSwapApllication.Data;
 using ebookSwapApllication.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace ebookSwapApllication.Controllers
 {
@@ -14,9 +16,36 @@ namespace ebookSwapApllication.Controllers
     {
         private readonly AppDbContext _context;
 
+
         public UsersController(AppDbContext context)
         {
             _context = context;
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public  ActionResult Login(User user)
+        {
+
+
+            var result =  _context.Users.Where(a => a.UserName.Equals(user.UserName) && a.UserPassword.Equals(user.UserPassword)).FirstOrDefault();
+
+            if (result != null)
+            {
+                return RedirectToAction("Index","Books");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Users");
+
+            }
+
+            return View();
+
         }
 
         // GET: Users

@@ -9,7 +9,7 @@ namespace ebookSwapApllication.Models
         public int UserId { get; set; }
         [Display(Name ="UserName")]
         [Required(ErrorMessage ="username is required")]
-        public string UserName { get; set; } = String.Empty;
+        public string? UserName { get; set; } = String.Empty;
         [Display(Name = "Full Name")]
         [Required(ErrorMessage = "FullName is required")]
 
@@ -21,7 +21,7 @@ namespace ebookSwapApllication.Models
         [Display(Name = "Password")]
         [Required(ErrorMessage = "Password is required")]
 
-        public string UserPassword { get; set; } = String.Empty;
+        public string? UserPassword { get; set; } = String.Empty;
         [Display(Name = "Phone Number")]
         [Required(ErrorMessage = "Phone Number is required")]
 

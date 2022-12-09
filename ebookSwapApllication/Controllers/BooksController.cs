@@ -31,7 +31,7 @@ namespace ebookSwapApllication.Controllers
 
             if (!string.IsNullOrEmpty(booksearch))
             {
-                bookquery = bookquery.Where(x => x.BookTitle.Contains(booksearch) || x.BookISBN13.Contains(booksearch) || x.BookAuthor.Contains(booksearch) || x.BookCategory.Contains(booksearch) || x.BookLanguage.Contains(booksearch));
+                bookquery = bookquery.Where(x => x.BookTitle.Contains(booksearch) || x.BookISBN13.Contains(booksearch) || x.BookAuthor.Contains(booksearch) || x.BookCategory.Contains(booksearch) || x.BookLanguage.Contains(booksearch)|| x.User.UserCity.Contains(booksearch));
             }
 
             return View(await bookquery.AsNoTracking().ToListAsync());

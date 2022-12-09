@@ -8,33 +8,56 @@ namespace ebookSwapApllication.Controllers
     {
         private readonly AppDbContext? _context;
 
+
         public IActionResult Index()
         {
             return View();
         }
+
         public IActionResult Login()
         {
             return View();
         }
+
         [HttpPost]
-        public IActionResult Login(LoginSignupViewModel model)
+        public  ActionResult Login(User user)
         {
-            if (!ModelState.IsValid)
+
+
+            var result =  _context.Users.Where(a => a.UserName.Equals(user.UserName) && a.UserPassword.Equals(user.UserPassword)).FirstOrDefault();
+
+            if (result != null)
             {
-                var User = from m in _context.Users select m;
-                User = User.Where(s => s.UserName.Contains(model.UserName));
-                if (User.Count() != 0)
-                {
-                    if (User.First().UserPassword == model.UserPassword)
-                    {
-                        return RedirectToAction("Index", "Book");
-                    }
-                }
+                return RedirectToAction("Index", "Books");
             }
 
-            ModelState.AddModelError("", "Invalid login attempt");
-            return View(model);
+            return View(user);
+
         }
+
+        //public IActionResult Login()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public IActionResult Login(LoginSignupViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        var User = from m in _context.Users select m;
+        //        User = User.Where(s => s.UserName.Contains(model.UserName));
+        //        if (User.Count() != 0)
+        //        {
+        //            if (User.First().UserPassword == model.UserPassword)
+        //            {
+        //                return RedirectToAction("Index", "Book");
+        //            }
+        //        }
+        //    }
+
+        //    ModelState.AddModelError("", "Invalid login attempt");
+        //    return View(model);
+        //}
         public IActionResult Signup()
         {
 

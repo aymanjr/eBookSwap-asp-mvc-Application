@@ -9,21 +9,38 @@ namespace ebookSwapApllication.Controllers
     public class BooksController : Controller
     {
         private readonly AppDbContext _context;
-        public BooksController(AppDbContext context)
+        private readonly IHttpContextAccessor _contextAccessor;
+
+        public BooksController(AppDbContext context, IHttpContextAccessor contextAccessor)
         {
             _context = context;
+            _contextAccessor = contextAccessor;
         }
         public async Task<IActionResult> Index()
         {
+            if (_contextAccessor.HttpContext.Session.GetInt32("sessionKeyUserId") == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+            else
+            {
+                var allbooks = await _context.Books.Include(n => n.User).ToListAsync();
+                return View(allbooks);
+            }
 
-            var allbooks = await _context.Books.Include(n=>n.User).ToListAsync();
-            return View(allbooks);
 
         }
 
         [HttpGet]
         public async Task<IActionResult> Index(string booksearch)
         {
+            if (_contextAccessor.HttpContext.Session.GetInt32("sessionKeyUserId") == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }else
+            {
+
+            
 
             ViewData["getbookdetail"] = booksearch;
 
@@ -35,7 +52,7 @@ namespace ebookSwapApllication.Controllers
             }
 
             return View(await bookquery.AsNoTracking().ToListAsync());
-
+            }
 
         }
 

@@ -15,11 +15,13 @@ namespace ebookSwapApllication.Controllers
     public class UsersController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IHttpContextAccessor _contextAccessor;
 
 
-        public UsersController(AppDbContext context)
+        public UsersController(AppDbContext context, IHttpContextAccessor contextAccessor)
         {
             _context = context;
+            _contextAccessor = contextAccessor;
         }
 
         public ActionResult Login()
@@ -36,6 +38,11 @@ namespace ebookSwapApllication.Controllers
 
             if (result != null)
             {
+                _contextAccessor.HttpContext.Session.SetString("sessionKeyUsername", user.UserName);
+                _contextAccessor.HttpContext.Session.SetInt32("sessionKeyUserId", user.UserId);
+
+                //Session["UserID"] = obj.UserId.ToString();
+                //Session["UserName"] = obj.UserName.ToString();
                 return RedirectToAction("Index","Books");
             }
             else
@@ -44,7 +51,7 @@ namespace ebookSwapApllication.Controllers
 
             }
 
-            return View();
+           
 
         }
 

@@ -69,8 +69,13 @@ namespace ebookSwapApllication.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var user = await _context.Users.Include(x => x.Books)
                 .FirstOrDefaultAsync(m => m.UserId == id);
+
+            ViewBag.count = _context.Books.Where(x => x.UserId == id).Count();
+
+            var books = await _context.Books.Where(x => x.UserId == id).ToListAsync();
+
             if (user == null)
             {
                 return NotFound();

@@ -30,8 +30,8 @@
                     <div class="p-4 text-black" style="background-color: #f8f9fa;">
                         <div class="d-flex justify-content-end text-center py-1">
                             <div>
-                                <p class="mb-1 h5">253</p>
-                                <p class="small text-muted mb-0">Photos</p>
+                                <p class="mb-1 h5">@ViewBag.count</p>
+                                <p class="small text-muted mb-0">Books</p>
                             </div>
                             <div class="px-3">
                                 <p class="mb-1 h5">1026</p>
@@ -56,26 +56,23 @@
                             <p class="lead fw-normal mb-0">Recent photos</p>
                             <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
                         </div>
-                        <div class="row g-2">
-                            <div class="col mb-2">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                                     alt="image 1" class="w-100 rounded-3">
+                         @foreach (var item in Model.Books)
+                        {
+                       
+                            <a asp-action="Details" asp-controller="Books" asp-route-id="@item.BookId">
+
+                            <div class="card">
+                            <div class="card-header">
+                                @item.BookTitle
                             </div>
-                            <div class="col mb-2">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                                     alt="image 1" class="w-100 rounded-3">
-                            </div>
-                        </div>
-                        <div class="row g-2">
-                            <div class="col">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                                     alt="image 1" class="w-100 rounded-3">
-                            </div>
-                            <div class="col">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                                     alt="image 1" class="w-100 rounded-3">
+                            <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                    <footer class="blockquote-footer">USER NOTE : <cite title="Source Title">@item.BookNotes</cite></footer>
+                                </blockquote>
                             </div>
                         </div>
+                            </a>
+                        }
                     </div>
                 </div>
             </div>

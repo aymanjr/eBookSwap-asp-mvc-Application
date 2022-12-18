@@ -10,6 +10,7 @@ namespace ebookSwapApllication.Models
         [Key]
         public int BookId { get; set; }
         public string BookTitle { get; set; } = String.Empty;
+
         public string BookISBN13 { get; set; } = String.Empty;
         public string BookLanguage { get; set; } = String.Empty;
         public string BookNumPages { get; set; } = String.Empty;

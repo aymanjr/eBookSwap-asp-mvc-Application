@@ -201,7 +201,9 @@
                                     </div>
                                     <div class="col-md-8 col-12">
                                         <ul>
-                                            <li><i class="fas fa-user"></i> <strong>Username :</strong> @Html.DisplayFor(model => model.User.UserName) </li>
+                                            <p class="card-text">
+                                                <a asp-action="Details" asp-controller="Users" asp-route-id="@Model.User.UserId">
+                                            <li><i class="fas fa-user"></i> <strong>Username :</strong> @Html.DisplayFor(model => model.User.UserName) </li></a>
                                             <li><i class="fas fa-comment"></i> <strong>User Note :</strong>@Html.DisplayFor(model => model.BookNotes)</li>
                                             <li>
                                                 <i class="fas fa-info-circle"></i> <strong>Book Description :</strong>
@@ -230,7 +232,8 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">@Html.DisplayFor(model => model.User.UserName)</h5>
+                                                    <a asp-action="Details" asp-controller="Users" asp-route-id="@Model.User.UserId">
+                                                    <h5 class="modal-title" id="exampleModalLabel">@Html.DisplayFor(model => model.User.UserName)</h5></a>
                                                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -239,7 +242,8 @@
                                                             Contact Info
                                                         </div>
                                                         <ul class="list-group list-group-flush">
-                                                            <li class="list-group-item"><span style="color:darkblue">Name : </span> @Html.DisplayFor(model => model.User.UserFullName) </li>
+                                                            <a asp-action="Details" asp-controller="Users" asp-route-id="@Model.User.UserId)" style="color:white">
+                                                            <li class="list-group-item"><span style="color:darkblue">Name : </span> @Html.DisplayFor(model => model.User.UserFullName) </li></a>
                                                             <li class="list-group-item"><span style="color:darkblue">Phone Number : </span> @Html.DisplayFor(model => model.User.Userphonenumber) </li>
                                                             <li class="list-group-item"><span style="color:darkblue">Book Note : </span> @Html.DisplayFor(model => model.BookNotes) </li>
 

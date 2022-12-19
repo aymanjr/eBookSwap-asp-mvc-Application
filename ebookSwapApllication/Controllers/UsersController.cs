@@ -88,7 +88,7 @@ namespace ebookSwapApllication.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
-            return View();
+            return RedirectToAction("Login");
         }
 
         // POST: Users/Create
@@ -102,9 +102,10 @@ namespace ebookSwapApllication.Controllers
             {
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Login));
             }
-            return View(user);
+            return RedirectToAction("Login");
+
         }
 
         // GET: Users/Edit/5

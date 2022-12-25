@@ -105,7 +105,7 @@ namespace ebookSwapApllication.Controllers
                                        Text = book.BookCategory,
                                        Value = book.BookCategory.ToString()
 
-                                   }).ToList();
+                                   }).Distinct().ToList();
                 catgorylist.Insert(0, new SelectListItem()
                 {
 

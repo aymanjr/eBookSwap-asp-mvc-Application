@@ -171,7 +171,37 @@
     #summary a:not(.collapsed):after {
         content: '- Read Less';
     }
+    .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
 
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+.btncontact {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+
+
+.btncontact:hover, a:hover {
+  opacity: 0.7;
+}
 
 </style>
 <div class="container pt-5">
@@ -221,13 +251,20 @@
                                            
                                         </ul>
                                     </div>
+                                    <div class="card">
 
-                                    <div class="col-12">
+                                        <h1><a asp-action="Details" asp-controller="Users" asp-route-id="@Model.User.UserId">@Html.DisplayFor(model => model.User.UserFullName)</a></h1>
+                                        <p class="title">Books Count : <strong> @ViewBag.countbookbookdetail</strong></p>
+                                        <p>City : <strong>@Html.DisplayFor(model => model.User.UserCity)</strong></p>
+
+                                        <p><button class="btn btn-success w-100 mb-md-0 mb-3 mr-md-3 mr-0" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-phone"></i> Contact</button></p>
+                                    </div>
+@*                                    <div class="col-12">
                                         <div class="d-flex flex-md-row flex-column align-items-center justify-content-end">
-                                            <button class="btn btn-success w-100 mb-md-0 mb-3 mr-md-3 mr-0" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-phone"></i> Contact Seller</button>
+                                            <button class="btn btn-success w-100 mb-md-0 mb-3 mr-md-3 mr-0" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-phone"></i> Contact @Html.DisplayFor(model => model.User.UserName)</button>
                                   
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">

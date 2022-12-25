@@ -74,6 +74,8 @@ namespace ebookSwapApllication.Controllers
                 var book = await _context.Books.Include(n => n.User)
                      .FirstOrDefaultAsync(m => m.BookId == id);
 
+                ViewBag.countbookbookdetail = _context.Books.Where(x=>x.UserId == book.UserId).Count();
+
 
                 if (book == null)
                 {

@@ -1,4 +1,5 @@
-﻿@model ebookSwapApllication.Models.Book
+﻿@inject IHttpContextAccessor contxt
+@model ebookSwapApllication.Models.Book
 @{
     ViewData["Title"] = "Create";
 }
@@ -109,11 +110,12 @@
                                         <h6 class="mb-0">User Id :</h6>
 
                                     </div>
-                                    <div class="col-md-9 pe-5">
 
-                                        <input type="text" asp-for="UserId" class="form-control form-control-lg" />
 
-                                    </div>
+                                    <input type="text" asp-for="UserId" value="@contxt.HttpContext.Session.GetInt32("sessionKeyUserId")" class="form-control form-control-lg" hidden />
+                                
+
+                                   
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="BookCondition" asp-for="BookCondition" value="NEW" id="flexRadioDefault1">

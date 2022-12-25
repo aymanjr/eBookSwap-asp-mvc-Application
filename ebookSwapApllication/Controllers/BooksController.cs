@@ -11,19 +11,18 @@ namespace ebookSwapApllication.Controllers
         private readonly AppDbContext _context;
         private readonly IHttpContextAccessor _contextAccessor;
 
-        public BooksController(AppDbContext context, IHttpContextAccessor contextAccessor)
+        public BooksController(AppDbContext context)
         {
             _context = context;
-            _contextAccessor = contextAccessor;
         }
         public async Task<IActionResult> Index()
         {
-            if (_contextAccessor.HttpContext.Session.GetInt32("sessionKeyUserId") == null)
+            if (HttpContext.Session.GetInt32("sessionKeyUserId") == null)
             {
                 return RedirectToAction("Login", "Users");
             }
             else
-            {
+            { 
                 var allbooks = await _context.Books.Include(n => n.User).ToListAsync();
                 return View(allbooks);
             }
@@ -34,7 +33,7 @@ namespace ebookSwapApllication.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(string booksearch)
         {
-            if (_contextAccessor.HttpContext.Session.GetInt32("sessionKeyUserId") == null)
+            if (HttpContext.Session.GetInt32("sessionKeyUserId") == null)
             {
                 return RedirectToAction("Login", "Users");
             }else
@@ -60,21 +59,29 @@ namespace ebookSwapApllication.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Books == null)
+            if (HttpContext.Session.GetInt32("sessionKeyUserId") == null)
             {
-                return NotFound();
+                return RedirectToAction("Login", "Users");
             }
-
-            var book = await _context.Books.Include(n => n.User)
-                 .FirstOrDefaultAsync(m => m.BookId == id);
-
-
-            if (book == null)
+            else
             {
-                return NotFound();
-            }
 
-            return View(book);
+                if (id == null || _context.Books == null)
+                {
+                    return NotFound();
+                }
+
+                var book = await _context.Books.Include(n => n.User)
+                     .FirstOrDefaultAsync(m => m.BookId == id);
+
+
+                if (book == null)
+                {
+                    return NotFound();
+                }
+
+                return View(book);
+            }
         }
     
         // GET: Books/Create
@@ -83,24 +90,33 @@ namespace ebookSwapApllication.Controllers
             //Book book = new Book();
             //book.BookCategoryList = new SelectList(_context.Books.ToList(), "BookCategory", "BookCategory");
 
+            if (HttpContext.Session.GetInt32("sessionKeyUserId") == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+            else
+            {
+                var catgorylist = (from book in _context.Books
+                                   select new SelectListItem()
+                                   {
 
-            var catgorylist = (from book in _context.Books select new SelectListItem() {
+                                       Text = book.BookCategory,
+                                       Value = book.BookCategory.ToString()
 
-                Text = book.BookCategory,
-                Value = book.BookCategory.ToString()
+                                   }).ToList();
+                catgorylist.Insert(0, new SelectListItem()
+                {
 
-            }).ToList();
-            catgorylist.Insert(0, new SelectListItem() { 
-            
-               Text = "--Select--",
-               Value=String.Empty
-            });
+                    Text = "--Select--",
+                    Value = String.Empty
+                });
 
-            ViewBag.Catgorylist = catgorylist;
+                ViewBag.Catgorylist = catgorylist;
 
-           
 
-            return View();
+
+                return View();
+            }
         }
 
         [HttpPost]

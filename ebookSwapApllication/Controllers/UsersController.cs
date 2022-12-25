@@ -18,10 +18,10 @@ namespace ebookSwapApllication.Controllers
         private readonly IHttpContextAccessor _contextAccessor;
 
 
-        public UsersController(AppDbContext context, IHttpContextAccessor contextAccessor)
+        public UsersController(AppDbContext context)
         {
             _context = context;
-            _contextAccessor = contextAccessor;
+          
         }
 
         public ActionResult Login()
@@ -38,8 +38,9 @@ namespace ebookSwapApllication.Controllers
 
             if (result != null)
             {
-                _contextAccessor.HttpContext.Session.SetString("sessionKeyUsername", user.UserName);
-                _contextAccessor.HttpContext.Session.SetInt32("sessionKeyUserId", user.UserId);
+      
+                HttpContext.Session.SetInt32("sessionKeyUserId", result.UserId);
+                HttpContext.Session.SetString("sessionKeyUsername", result.UserName);
 
                 //Session["UserID"] = obj.UserId.ToString();
                 //Session["UserName"] = obj.UserName.ToString();

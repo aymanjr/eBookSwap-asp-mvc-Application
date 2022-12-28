@@ -54,8 +54,14 @@
                     <h1>@Html.DisplayFor(model => model.UserFullName)</h1>
                     <p>Books Count : <strong> @ViewBag.count</strong></p>
                     <p>City : <strong>@Html.DisplayFor(model => model.UserCity)</strong></p>
+                    <p4>
 
-                    <p><button class="btn btn-success w-100 mb-md-0 mb-3 mr-md-3 mr-0" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-phone"></i> Contact</button></p>
+                        <button type="button" class="btn mb-2 mb-md-0 btn-primary btn-sm">edit profile <i class="icon-effect ion-ios-arrow-round-forward"></i></button>
+                        <button type="button" class="btn mb-2 mb-md-0 btn-secondary btn-sm btn-round mr-3">add books</button>
+                        <button type="button" style="background-color: #008854" ; data-mdb-toggle="modal" data-mdb-target="#exampleModal" class="btn mb-2 mb-md-0 btn-primary btn-sm">contact <i class="icon-effect ion-ios-arrow-round-forward"></i></button>
+
+                    </p4>
+
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -80,6 +86,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
+
                                     <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
                                 </div>
                             </div>

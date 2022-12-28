@@ -5,7 +5,7 @@ namespace ebookSwapApllication.Models
 {
     public class MultiselectViewModel
     {
-        public List<SelectListItem> Listofcategories { get; set; }
+        public List<SelectListItem>? Listofcategories { get; set; }
 
 
     }

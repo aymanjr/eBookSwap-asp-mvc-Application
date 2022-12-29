@@ -45,6 +45,7 @@ namespace ebookSwapApllication.Controllers
 
                 //Session["UserID"] = obj.UserId.ToString();
                 //Session["UserName"] = obj.UserName.ToString();
+                ViewBag.profile = "true";
                 return RedirectToAction("Index","Books");
             }
             else
@@ -54,6 +55,15 @@ namespace ebookSwapApllication.Controllers
             }
 
            
+
+        }
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.SetInt32("sessionKeyUserId",0) ;
+            HttpContext.Session.SetString("sessionKeyUsername", null);
+            ViewBag.profile = "false";
+            return RedirectToAction("Login", "Users");
 
         }
 

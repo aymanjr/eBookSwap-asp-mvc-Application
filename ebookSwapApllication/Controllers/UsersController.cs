@@ -9,6 +9,7 @@ using ebookSwapApllication.Data;
 using ebookSwapApllication.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace ebookSwapApllication.Controllers
 {
@@ -68,6 +69,16 @@ namespace ebookSwapApllication.Controllers
             if (id == null || _context.Users == null)
             {
                 return NotFound();
+            }
+
+            if (HttpContext.Session.GetInt32("sessionKeyUserId")==id)
+            {
+                ViewBag.personalprofileconfirmation = "confirmationprofile";
+            }
+            else
+            {
+                ViewBag.personalprofileconfirmation = "nonprofile";
+
             }
 
             var user = await _context.Users.Include(x => x.Books)

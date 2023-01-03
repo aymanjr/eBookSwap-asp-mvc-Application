@@ -107,17 +107,13 @@
                                 <div class="row align-items-center py-3">
                                     <div class="col-md-3 ps-5">
 
-                                        <h6 class="mb-0">User Id :</h6>
+                                        <h6 class="mb-0">Condition  :</h6>
 
                                     </div>
 
 
                                     <input type="text" asp-for="UserId" value="@contxt.HttpContext.Session.GetInt32("sessionKeyUserId")" class="form-control form-control-lg" hidden />
-                                
-
-                                   
-                                </div>
-                                <div class="form-check">
+                                    <div class="form-check">
                                     <input class="form-check-input" type="radio" name="BookCondition" asp-for="BookCondition" value="NEW" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         NEW
@@ -129,6 +125,10 @@
                                         USED
                                     </label>
                                 </div>
+
+                                   
+                                </div>
+                            
                                 <div class="row align-items-center py-3">
                                     <div class="col-md-3 ps-5">
 

@@ -45,9 +45,6 @@ namespace ebookSwapApllication.Controllers
 
                 var bookquery = from x in _context.Books.Include(n => n.User) select x;
 
-
-
-
                 if (!string.IsNullOrEmpty(booksearch))
             {
                 bookquery = bookquery.Where(x => x.BookTitle.Contains(booksearch) || x.BookISBN13.Contains(booksearch) || x.BookAuthor.Contains(booksearch) || x.BookCategory.Contains(booksearch) || x.BookLanguage.Contains(booksearch)|| x.User.UserCity.Contains(booksearch));

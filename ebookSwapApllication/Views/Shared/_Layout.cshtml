@@ -39,9 +39,7 @@
                  @if (@ViewBag.profile == "false")
                 {
 
-
                     <a class="nav-link text-dark" asp-action="Login" asp-controller="Users" ><i class="glyphicon glyphicon-user"></i> Login</a>
-
                 }else{
                     <a class="nav-link text-dark" asp-action="Details" asp-controller="Users" asp-route-id="@Context.Session.GetInt32("sessionKeyUserId")"><i class="glyphicon glyphicon-user"></i>@Context.Session.GetString("sessionKeyUsername")</a>
 

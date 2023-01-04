@@ -61,7 +61,7 @@ namespace ebookSwapApllication.Controllers
         public ActionResult Logout()
         {
             HttpContext.Session.SetInt32("sessionKeyUserId",0) ;
-            HttpContext.Session.SetString("sessionKeyUsername", null);
+            HttpContext.Session.SetString("sessionKeyUsername", "");
             ViewBag.profile = "false";
             return RedirectToAction("Login", "Users");
 
@@ -143,7 +143,7 @@ namespace ebookSwapApllication.Controllers
             {
                 return NotFound();
             }
-            return View(user);
+            return RedirectToAction("Details");
         }
 
         // POST: Users/Edit/5

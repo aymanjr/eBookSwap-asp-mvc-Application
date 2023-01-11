@@ -43,6 +43,7 @@ namespace ebookSwapApllication.Controllers
                 HttpContext.Session.SetInt32("sessionKeyUserId", result.UserId);
                 HttpContext.Session.SetString("sessionKeyUsername", result.UserName);
 
+
                 //Session["UserID"] = obj.UserId.ToString();
                 //Session["UserName"] = obj.UserName.ToString();
                 ViewBag.profile = "true";
@@ -60,50 +61,86 @@ namespace ebookSwapApllication.Controllers
 
         public ActionResult Logout()
         {
-            HttpContext.Session.SetInt32("sessionKeyUserId",0) ;
-            HttpContext.Session.SetString("sessionKeyUsername", "");
-            ViewBag.profile = "false";
-            return RedirectToAction("Login", "Users");
+
+            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || string.IsNullOrEmpty(HttpContext.Session.GetString("sessionKeyUsername")))
+            {
+                return RedirectToAction("Login", "Users");
+            }
+            else
+            {
+                HttpContext.Session.SetInt32("sessionKeyUserId", 0);
+                HttpContext.Session.SetString("sessionKeyUsername", "");
+                ViewBag.profile = "false";
+                return RedirectToAction("Login", "Users");
+            }
 
         }
 
         // GET: Users
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Users.ToListAsync());
+            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || string.IsNullOrEmpty(HttpContext.Session.GetString("sessionKeyUsername")))
+            {
+                return RedirectToAction("Login", "Users");
+            }
+            else 
+           
+                return View(await _context.Users.ToListAsync());
+            
         }
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Users == null)
-            {
-                return NotFound();
-            }
 
-            if (HttpContext.Session.GetInt32("sessionKeyUserId")==id)
+            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || string.IsNullOrEmpty(HttpContext.Session.GetString("sessionKeyUsername")))
             {
-                ViewBag.personalprofileconfirmation = "confirmationprofile";
+                return RedirectToAction("Login", "Users");
             }
             else
             {
-                ViewBag.personalprofileconfirmation = "nonprofile";
+
+                if (id == null || _context.Users == null)
+                {
+                    return NotFound();
+                }
+
+                if (HttpContext.Session.GetInt32("sessionKeyUserId") == id)
+                {
+                    ViewBag.personalprofileconfirmation = "confirmationprofile";
+                }
+                else
+                {
+                    ViewBag.personalprofileconfirmation = "nonprofile";
+
+                }
+
+                var user = await _context.Users.Include(x => x.Books)
+                    .FirstOrDefaultAsync(m => m.UserId == id);
+
+                ViewBag.count = _context.Books.Where(x => x.UserId == id).Count();
+
+                var books = await _context.Books.Where(x => x.UserId == id).ToListAsync();
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                return View(user);
 
             }
+        }
 
-            var user = await _context.Users.Include(x => x.Books)
-                .FirstOrDefaultAsync(m => m.UserId == id);
+        public ActionResult Chekin()
+        {
 
-            ViewBag.count = _context.Books.Where(x => x.UserId == id).Count();
-
-            var books = await _context.Books.Where(x => x.UserId == id).ToListAsync();
-
-            if (user == null)
+            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || string.IsNullOrEmpty(HttpContext.Session.GetString("sessionKeyUsername")))
             {
-                return NotFound();
+                return RedirectToAction("Login", "Users");
             }
+            else
+                return View();
 
-            return View(user);
         }
 
 

@@ -1,4 +1,6 @@
-﻿@model ebookSwapApllication.Models.Book
+﻿@using Microsoft.AspNetCore.Http
+@model ebookSwapApllication.Models.Book
+
 
 @{
     ViewData["Title"] = "Details";
@@ -252,12 +254,13 @@
                                         </ul>
                                     </div>
                                     <div class="card">
-
+                                        
                                         <h1><a asp-action="Details" asp-controller="Users" asp-route-id="@Model.User.UserId">@Html.DisplayFor(model => model.User.UserFullName)</a></h1>
                                         <p class="title">Books Count : <strong> @ViewBag.countbookbookdetail</strong></p>
                                         <p>City : <strong>@Html.DisplayFor(model => model.User.UserCity)</strong></p>
+                                            <p><button class="btn btn-success w-100 mb-md-0 mb-3 mr-md-3 mr-0" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-phone"></i> Contact</button></p>
 
-                                        <p><button class="btn btn-success w-100 mb-md-0 mb-3 mr-md-3 mr-0" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fas fa-phone"></i> Contact</button></p>
+
                                     </div>
 @*                                    <div class="col-12">
                                         <div class="d-flex flex-md-row flex-column align-items-center justify-content-end">

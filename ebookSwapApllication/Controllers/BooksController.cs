@@ -16,16 +16,17 @@ namespace ebookSwapApllication.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || HttpContext.Session.GetInt32("sessionKeyUserId") == null)
-            {
-                return RedirectToAction("Login", "Users");
-            }
-            else
-            {
-                var allbooks = await _context.Books.Include(n => n.User).ToListAsync();
+            //if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || HttpContext.Session.GetInt32("sessionKeyUserId") == null)
+            //{
+            //    return RedirectToAction("Login", "Users");
+            //}
+            //else
+            //{
+            
+            var allbooks = await _context.Books.Include(n => n.User).ToListAsync();
 
                 return View(allbooks);
-            }
+            //}
 
 
         }
@@ -33,11 +34,11 @@ namespace ebookSwapApllication.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(string booksearch)
         {
-            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || HttpContext.Session.GetInt32("sessionKeyUserId") == null)
-            {
-                return RedirectToAction("Login", "Users");
-            }else
-            {
+            //if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || HttpContext.Session.GetInt32("sessionKeyUserId") == null)
+            //{
+            //    return RedirectToAction("Login", "Users");
+            //}else
+            //{
 
             
 
@@ -51,7 +52,7 @@ namespace ebookSwapApllication.Controllers
             }
 
             return View(await bookquery.AsNoTracking().ToListAsync());
-            }
+            //}
 
         }
 
@@ -59,12 +60,12 @@ namespace ebookSwapApllication.Controllers
 
         public async Task<IActionResult> Details(int? id)
         {
-            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || HttpContext.Session.GetInt32("sessionKeyUserId") == null)
-            {
-                return RedirectToAction("Login", "Users");
-            }
-            else
-            {
+            //if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || HttpContext.Session.GetInt32("sessionKeyUserId") == null)
+            //{
+            //    return RedirectToAction("Login", "Users");
+            //}
+            //else
+            //{
 
                 if (id == null || _context.Books == null)
                 {
@@ -83,7 +84,7 @@ namespace ebookSwapApllication.Controllers
                 }
 
                 return View(book);
-            }
+            //}
         }
     
         // GET: Books/Create
@@ -92,7 +93,7 @@ namespace ebookSwapApllication.Controllers
             //Book book = new Book();
             //book.BookCategoryList = new SelectList(_context.Books.ToList(), "BookCategory", "BookCategory");
 
-            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || HttpContext.Session.GetInt32("sessionKeyUserId") == null)
+            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || string.IsNullOrEmpty(HttpContext.Session.GetString("sessionKeyUsername")))
             {
                 return RedirectToAction("Login", "Users");
             }

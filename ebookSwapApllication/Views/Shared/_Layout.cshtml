@@ -71,22 +71,44 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a asp-controller="Books" asp-action="Index" class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a asp-controller="Books" asp-action="Index" class="nav-link">Home <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a asp-controller="Books" asp-action="Index" class="nav-link" href="#"><i class="fa fa-book fa-lg" aria-hidden="true"></i>Books</a>
+                    <a asp-controller="Books" asp-action="Index" class="nav-link" ><i class="fa fa-book fa-lg" aria-hidden="true"></i>Books</a>
                 </li>
+               
+                    <li>
+
+                        <form method="get" asp-action="Index" class="navbar-form">
+
+
+                        <div class="input-group">
+                            <div class="form-outline">
+                                <input type="search" value="@ViewData["getbookdetail"]" name="booksearch" id="form1" class="form-control" />
+                                <label class="form-label" for="form1">Search</label>
+                            </div>
+                            <button type="submit" asp-controller="Books" asp-action="Index" class="btn btn-primary">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+
+
+                        </form>
+                    </li>
+                
 
 
             </ul>
             <div class="social-part">
-                <a asp-action="Details" asp-controller="Users" asp-route-id="@Context.Session.GetInt32("sessionKeyUserId")"> <i class="fa fa-user fa-lg" aria-hidden="true"></i></a>
-                <a asp-action="Logout" asp-controller="Users"> <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
-
+                    <a asp-action="Details" asp-controller="Users" asp-route-id="@Context.Session.GetInt32("sessionKeyUserId")"> <i class="fa fa-user fa-lg" aria-hidden="true"></i></a>
+                    <a asp-action="Logout" asp-controller="Users"> <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
             </div>
         </div>
     </nav>
+
+
+ 
     <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()

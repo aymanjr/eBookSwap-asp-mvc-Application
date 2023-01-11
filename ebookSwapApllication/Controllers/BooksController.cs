@@ -16,17 +16,24 @@ namespace ebookSwapApllication.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            //if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || HttpContext.Session.GetInt32("sessionKeyUserId") == null)
-            //{
-            //    return RedirectToAction("Login", "Users");
-            //}
-            //else
-            //{
-            
+
+            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || string.IsNullOrEmpty(HttpContext.Session.GetString("sessionKeyUsername")))
+            {
+                ViewBag.checkiflogin = "false";
+
+
+            }
+            else
+            {
+                ViewBag.checkiflogin = "true";
+
+            }
+
+
             var allbooks = await _context.Books.Include(n => n.User).ToListAsync();
 
                 return View(allbooks);
-            //}
+            
 
 
         }
@@ -67,7 +74,19 @@ namespace ebookSwapApllication.Controllers
             //else
             //{
 
-                if (id == null || _context.Books == null)
+            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || string.IsNullOrEmpty(HttpContext.Session.GetString("sessionKeyUsername")))
+            {
+                ViewBag.checkiflogin = "false";
+
+
+            }
+            else
+            {
+                ViewBag.checkiflogin = "true";
+
+            }
+
+            if (id == null || _context.Books == null)
                 {
                     return NotFound();
                 }

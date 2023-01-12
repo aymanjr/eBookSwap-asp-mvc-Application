@@ -320,7 +320,7 @@
                                                                 Contact Info
                                                             </div>
                                                             <ul class="list-group list-group-flush">
-                                                                <a asp-action="Details" asp-controller="Users" asp-route-id="@Model.User.UserId)" style="color:white">
+                                                                <a asp-action="Details" asp-controller="Users" asp-route-id="@Model.User.UserId" style="color:white">
                                                                 <li class="list-group-item"><span style="color:darkblue">Name : </span> @Html.DisplayFor(model => model.User.UserFullName) </li></a>
                                                                 <li class="list-group-item"><span style="color:darkblue">Phone Number : </span> @Html.DisplayFor(model => model.User.Userphonenumber) </li>
                                                                 <li class="list-group-item"><span style="color:darkblue">Book Note : </span> @Html.DisplayFor(model => model.BookNotes) </li>

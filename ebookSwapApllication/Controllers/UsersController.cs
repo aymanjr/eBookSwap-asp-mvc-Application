@@ -83,11 +83,11 @@ namespace ebookSwapApllication.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || string.IsNullOrEmpty(HttpContext.Session.GetString("sessionKeyUsername")))
-            {
+            //if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || string.IsNullOrEmpty(HttpContext.Session.GetString("sessionKeyUsername")))
+            //{
                 return RedirectToAction("Login", "Users");
-            }
-            else 
+            //}
+            //else 
            
                 return View(await _context.Users.ToListAsync());
             

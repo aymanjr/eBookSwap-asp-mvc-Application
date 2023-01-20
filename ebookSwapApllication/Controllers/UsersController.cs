@@ -85,17 +85,18 @@ namespace ebookSwapApllication.Controllers
         {
             //if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || string.IsNullOrEmpty(HttpContext.Session.GetString("sessionKeyUsername")))
             //{
-                return RedirectToAction("Login", "Users");
+                return RedirectToAction("Index", "Books");
             //}
             //else 
            
-                return View(await _context.Users.ToListAsync());
+              //  return View(await _context.Users.ToListAsync());
             
         }
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
 
             if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || string.IsNullOrEmpty(HttpContext.Session.GetString("sessionKeyUsername")))
             {
@@ -184,7 +185,7 @@ namespace ebookSwapApllication.Controllers
             {
                 return NotFound();
             }
-            return RedirectToAction("Details");
+            return View(user);
         }
 
         // POST: Users/Edit/5

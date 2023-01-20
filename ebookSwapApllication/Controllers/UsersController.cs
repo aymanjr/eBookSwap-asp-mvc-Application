@@ -103,7 +103,7 @@ namespace ebookSwapApllication.Controllers
                 return RedirectToAction("Login", "Users");
             }
             else
-            {
+            { 
 
                 if (id == null || _context.Users == null)
                 {
@@ -175,17 +175,37 @@ namespace ebookSwapApllication.Controllers
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Users == null)
+
+            if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || string.IsNullOrEmpty(HttpContext.Session.GetString("sessionKeyUsername")))
             {
-                return NotFound();
+                return RedirectToAction("Login", "Users");
+            }
+            else
+            {
+
+                if (HttpContext.Session.GetInt32("sessionKeyUserId") != id)
+                {
+                    return RedirectToAction("Index", "Books");
+
+                }
+                else
+                {
+                    if (id == null || _context.Users == null)
+                    {
+                        return NotFound();
+                    }
+
+                    var user = await _context.Users.FindAsync(id);
+                    if (user == null)
+                    {
+                        return NotFound();
+                    }
+                    return View(user);
+                }
+
+           
             }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
         }
 
         // POST: Users/Edit/5
@@ -226,19 +246,21 @@ namespace ebookSwapApllication.Controllers
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Users == null)
-            {
-                return NotFound();
-            }
+            //if (id == null || _context.Users == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            //var user = await _context.Users
+            //    .FirstOrDefaultAsync(m => m.UserId == id);
+            //if (user == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return View(user);
+            //return View(user);
+            return RedirectToAction("Index", "Books");
+
         }
 
         // POST: Users/Delete/5
@@ -246,18 +268,20 @@ namespace ebookSwapApllication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Users == null)
-            {
-                return Problem("Entity set 'AppDbContext.Users'  is null.");
-            }
-            var user = await _context.Users.FindAsync(id);
-            if (user != null)
-            {
-                _context.Users.Remove(user);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //if (_context.Users == null)
+            //{
+            //    return Problem("Entity set 'AppDbContext.Users'  is null.");
+            //}
+            //var user = await _context.Users.FindAsync(id);
+            //if (user != null)
+            //{
+            //    _context.Users.Remove(user);
+            //}
+
+            //await _context.SaveChangesAsync();
+            //return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Books");
+
         }
 
         private bool UserExists(int id)

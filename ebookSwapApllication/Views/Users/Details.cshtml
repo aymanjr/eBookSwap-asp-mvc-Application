@@ -57,6 +57,7 @@
                     <p4>
                         @if (@ViewBag.personalprofileconfirmation == "confirmationprofile")
                         {
+
                             <a asp-controller="Users" asp-action="Edit"  asp-route-id="@Model.UserId" type="button" class="btn mb-2 mb-md-0 btn-primary btn-sm">edit profile <i class="icon-effect ion-ios-arrow-round-forward"></i></a>
                             <a asp-controller="Books" asp-action="Create" class="btn mb-2 mb-md-0 btn-secondary btn-sm btn-round mr-3">add books</a>
                         }

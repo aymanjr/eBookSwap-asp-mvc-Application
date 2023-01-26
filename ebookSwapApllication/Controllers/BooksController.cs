@@ -155,29 +155,45 @@ namespace ebookSwapApllication.Controllers
             return View(book);
         }
 
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null || _context.Books == null)
+            {
+                return NotFound();
+            }
 
-        //[HttpPost] 
-        //public IActionResult Create(CategoryViewModel categoryViewModel,Book book)
-        //{
+            var book = await _context.Books
+                .FirstOrDefaultAsync(m => m.BookId == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
 
-        //   var selectedValue = categoryViewModel.Listofcategories;
+            return View(book);
+            // return RedirectToAction("Index", "Books");
 
-        //    var newbook = new Book()
-        //    {
-        //        BookTitle = book.BookTitle,
-        //        BookCondition  = book.BookCondition,
-        //        BookAuthor = book.BookAuthor,
-        //        BookDescription = book.BookDescription,
-        //        BookLanguage =     book.BookLanguage,
-        //        BookNotes = book.BookNotes,
-        //        BookPublisherID = book.BookPublisherID,
-        //        BookNumPages = book.BookNumPages,
-        //        BookCategory = selectedValue.ToString(),
-        //    };
+        }
 
+        // POST: Books/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (_context.Books == null)
+            {
+                return Problem("Entity set 'AppDbContext.Books'  is null.");
+            }
+            var book = await _context.Books.FindAsync(id);
+            if (book != null)
+            {
+                _context.Books.Remove(book);
+            }
 
-        //    return View(categoryViewModel);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
 
-        //}
+           // return RedirectToAction("Index", "Books");
+
+        }
     }
 }

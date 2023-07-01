@@ -17,7 +17,8 @@ namespace ebookSwapApllication.Models
         public string BookNumPages { get; set; } 
         public string BookPublicationDate { get; set; } 
         public string BookPublisherID { get; set; }
-        public string BookAuthor { get; set; } 
+        public string BookAuthor { get; set; } = String.Empty;
+
         public string BookCategory { get; set; } = String.Empty;
         [NotMapped]
         public SelectList? BookCategoryList { get; set; }

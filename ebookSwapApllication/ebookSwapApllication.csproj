@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\BookCovers\" />
+    <Folder Include="wwwroot\uploaded_files\" />
   </ItemGroup>
 
 </Project>

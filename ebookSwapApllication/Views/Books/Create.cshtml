@@ -3,31 +3,22 @@
 @{
     ViewData["Title"] = "Create";
 }
-@{
-    @using (Html.BeginForm("Create", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div class="">
-            <div class="row d-flex justify-content-center align-items-center">
-                <div class="col-xl-9">
-
-                    <h1 class="text-white mb-4">Apply for a job</h1>
-            <form asp-action="Create" method="post" role="form">
-
-                    <div class="card" style="border-radius: 15px;">
-                        <div class="card-body">
-
-                            <div class="row align-items-center pt-4 pb-3">
-                                <div class="col-md-3 ps-5">
-
-                                    <h6 class="mb-0">Book Title :</h6>
-
-                                </div>
-                                <div class="col-md-9 pe-5">
-
-                                        <input type="text" asp-for="BookTitle" class="form-control form-control-lg" />
-
-                                </div>
+@using (Html.BeginForm("Create", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-xl-9">
+                <h1 class="text-white mb-4">Apply for a job</h1>
+                <div class="card" style="border-radius: 15px;">
+                    <div class="card-body">
+                        <div class="row align-items-center pt-4 pb-3">
+                            <div class="col-md-3 ps-5">
+                                <h6 class="mb-0">Book Title :</h6>
                             </div>
+                            <div class="col-md-9 pe-5">
+                                <input type="text" asp-for="BookTitle" class="form-control form-control-lg" />
+                            </div>
+                        </div>
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
 
@@ -149,9 +140,14 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <select asp-for="BookCategory" asp-items="@(new SelectList(ViewBag.Catgorylist,"Value","Text"))" class="form-control">
-                                         
+                                        <select asp-for="BookCategory" class="form-control">
+                                            <option value="">-- Select Category --</option>
+                                            @foreach (var category in ViewBag.Categories)
+                                            {
+                                                <option value="@category">@category</option>
+                                            }
                                         </select>
+
 
                                     </div>
                                 </div>
@@ -173,15 +169,12 @@
 
 
 
-                            <div class="px-5 py-4">
-                                <button type="submit" class="btn btn-primary btn-lg" value="submit">Create Book</button>
-                            </div>
-
+                        <div class="px-5 py-4">
+                            <button type="submit" class="btn btn-primary btn-lg" value="submit">Create Book</button>
                         </div>
                     </div>
-             </form>
                 </div>
             </div>
         </div>
-    }
+    </div>
 }

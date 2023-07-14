@@ -118,22 +118,11 @@ namespace ebookSwapApllication.Controllers
             }
             else
             {
-                var catgorylist = (from book in _context.Books
-                                   select new SelectListItem()
-                                   {
+                var categories = _context.Books.Select(b => b.BookCategory).Distinct().ToList();
 
-                                       Text = book.BookCategory,
-                                       Value = book.BookCategory.ToString()
+                // Store categories in ViewBag
+                ViewBag.Categories = categories;
 
-                                   }).Distinct().ToList();
-                catgorylist.Insert(0, new SelectListItem()
-                {
-
-                    Text = "--Select--",
-                    Value = String.Empty
-                });
-
-                ViewBag.Catgorylist = catgorylist;
 
 
 
@@ -143,17 +132,22 @@ namespace ebookSwapApllication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookTitle","BookLanguage","BookAuthor","BookCondition","UserId","BookNotes","BookCategory", "BookISBN13", "BookNumPages", "BookPublicationDate", "BookPublisherID", "BookDescription")] Book book)
+        public async Task<IActionResult> Create([Bind("BookTitle", "BookLanguage", "BookAuthor", "BookCondition", "UserId", "BookNotes", "BookCategory", "BookISBN13", "BookNumPages", "BookPublicationDate", "BookPublisherID", "BookDescription", "BookFilePath")] Book book)
         {
             if (ModelState.IsValid)
             {
-
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            // If the model state is not valid, retrieve the categories again and pass them to the view
+            var categories = _context.Books.Select(b => b.BookCategory).Distinct().ToList();
+            ViewBag.Categories = categories;
+
             return View(book);
         }
+
 
         public async Task<IActionResult> Delete(int? id)
         {

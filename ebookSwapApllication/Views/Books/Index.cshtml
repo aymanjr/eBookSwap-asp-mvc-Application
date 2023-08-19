@@ -29,6 +29,28 @@
         -webkit-text-stroke-width: 1px;
         -webkit-text-stroke-color: black;
     }
+
+    .card-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* Fade-in animation */
+    .card {
+        opacity: 0;
+        animation: fadeIn 0.5s ease-in-out forwards;
+    }
+
+    @@keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
 </style>
 <div class="row">
         <div class="container py-2 my-5">
@@ -66,58 +88,42 @@
 
     @foreach (var item in Model)
     {
-        <div class="col-md-4 col-xs-6 col-md-3 border-primary mb-3">
-            <div class="card mb-3" style="max-width: 400px;">
-                <div class="row g-0">
-                    <div class="col-md-12">
-                        <div class="card-header text-white bg-info">
-                            <p class="card-text">
-                                <h5 class="card-title">
-                                    @item.BookTitle
-                                    <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
-                                </h5>
-                            </p>
-                        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="card-title">@item.BookTitle</span>
+                        <a class="text-white"><i class="bi bi-pencil-square"></i></a>
                     </div>
-                    
-                    <div class="col-md-6">
-                        <div class="card-body">
-                            <p class="card-text">@item.BookLanguage</p>
-                            <p class="card-text"><b>Author: </b>@item.BookAuthor</p>
-                            <p class="card-text"><b>Category: </b>@item.BookCategory</p>
-                            <a asp-action="Details" asp-controller="Users" asp-route-id="@item.User.UserId"><p class="card-text"><b>User Name: </b>@item.User.UserName</p></a>
-                            <p class="card-text"><b>User Name: </b>@item.User.UserCity</p>
-                            <p class="card-text"><b>Note : </b>@item.BookNotes</p>
-                            <p class="card-text ">
-                                <b>Condition: </b>
-                                @if (item.BookCondition == "new")
-                                {
-                                    <span class="badge bg-success text-white">NEW</span>
-                                }else{
-                                    <span class="badge bg-primary text-white">USED</span>
-
-                                }
-                            </p>
-
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card-footer ">
-                            <p class="card-text">
-                                <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.BookId"><i class="bi bi-eye-fill"></i> Show Details</a>
-                            </p>
-                        </div>
-                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@item.BookLanguage</p>
+                    <p class="card-text"><b>Author:</b> @item.BookAuthor</p>
+                    <p class="card-text"><b>Category:</b> @item.BookCategory</p>
+                    <a asp-action="Details" asp-controller="Users" asp-route-id="@item.User.UserId">
+                        <p class="card-text"><b>User Name:</b> @item.User.UserName</p>
+                    </a>
+                    <p class="card-text"><b>User City:</b> @item.User.UserCity</p>
+                    <p class="card-text"><b>Note:</b> @item.BookNotes</p>
+                    <p class="card-text">
+                        <b>Condition:</b>
+                        @if (item.BookCondition == "new")
+                        {
+                            <span class="badge bg-success text-white">NEW</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-primary text-white">USED</span>
+                        }
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.BookId">
+                        <i class="bi bi-eye-fill"></i> Show Details
+                    </a>
                 </div>
             </div>
         </div>
-
-
-
-
-      
-
-        
     }
 
 </div>

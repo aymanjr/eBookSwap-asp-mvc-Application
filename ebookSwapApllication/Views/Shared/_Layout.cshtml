@@ -126,6 +126,18 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var fadeIns = document.querySelectorAll('.fade-in');
+
+            fadeIns.forEach(function (card, index) {
+                // Set a timeout for each card to stagger the fade-in effect
+                setTimeout(function () {
+                    card.style.opacity = '1';
+                }, index * 100); // Adjust the delay for a staggered effect
+            });
+        });
+    </script>
 
 
 

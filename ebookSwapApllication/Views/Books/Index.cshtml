@@ -36,20 +36,12 @@
         white-space: nowrap;
     }
 
-    /* Fade-in animation */
-    .card {
+    /* Style to hide initially and apply fade-in effect */
+
+
+    .fade-in {
         opacity: 0;
-        animation: fadeIn 0.5s ease-in-out forwards;
-    }
-
-    @@keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 1;
-        }
+        transition: opacity 0.5s ease-in-out; /* Add a transition property */
     }
 </style>
 <div class="row">
@@ -61,7 +53,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card acik-renk-form">
+                <div class="card fade-in acik-renk-form">
                         <div class="card-body">
                         <form method="get" asp-action="Index">
 
@@ -89,7 +81,7 @@
     @foreach (var item in Model)
     {
         <div class="col-md-4 mb-3">
-            <div class="card">
+            <div class="card fade-in">
                 <div class="card-header bg-info text-white">
                     <div class="d-flex justify-content-between align-items-center">
                         <span class="card-title">@item.BookTitle</span>

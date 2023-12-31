@@ -37,33 +37,28 @@ namespace ebookSwapApllication.Controllers
 
 
         }
-    
+
 
 
 
         [HttpGet]
-        public async Task<IActionResult> Index(string booksearch)
+        public async Task<IActionResult> Index(string booksearch, string condition)
         {
-            //if (HttpContext.Session.GetInt32("sessionKeyUserId") == 0 || HttpContext.Session.GetInt32("sessionKeyUserId") == null)
-            //{
-            //    return RedirectToAction("Login", "Users");
-            //}else
-            //{
+            var bookquery = _context.Books.Include(n => n.User).AsQueryable();
 
-            
+            if (!string.IsNullOrEmpty(booksearch))
+            {
+                bookquery = bookquery.Where(x => x.BookTitle.Contains(booksearch) || x.BookISBN13.Contains(booksearch) || x.BookAuthor.Contains(booksearch) || x.BookCategory.Contains(booksearch) || x.BookLanguage.Contains(booksearch) || x.User.UserCity.Contains(booksearch));
+            }
+
+            if (!string.IsNullOrEmpty(condition))
+            {
+                bookquery = bookquery.Where(x => x.BookCondition.ToLower() == condition.ToLower());
+            }
 
             ViewData["getbookdetail"] = booksearch;
 
-                var bookquery = from x in _context.Books.Include(n => n.User) select x;
-
-                if (!string.IsNullOrEmpty(booksearch))
-            {
-                bookquery = bookquery.Where(x => x.BookTitle.Contains(booksearch) || x.BookISBN13.Contains(booksearch) || x.BookAuthor.Contains(booksearch) || x.BookCategory.Contains(booksearch) || x.BookLanguage.Contains(booksearch)|| x.User.UserCity.Contains(booksearch));
-            }
-
             return View(await bookquery.AsNoTracking().ToListAsync());
-            //}
-
         }
 
         [HttpGet]

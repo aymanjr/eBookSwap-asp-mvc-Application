@@ -70,9 +70,9 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a class="btn btn-primary" asp-action="FilterNew">New</a>
-                                    <a class="btn btn-primary" asp-action="FilterUsed">Used</a>
-                                    <a class="btn btn-primary" asp-action="FilterAll">All</a>
+                                    <a class="btn btn-primary" asp-action="Index" asp-route-booksearch="@ViewData["getbookdetail"]">All</a>
+                                    <a class="btn btn-primary" asp-action="Index" asp-route-booksearch="@ViewData["getbookdetail"]" asp-route-condition="new">New</a>
+                                    <a class="btn btn-primary" asp-action="Index" asp-route-booksearch="@ViewData["getbookdetail"]" asp-route-condition="used">Used</a>
                                 </div>
                             </div>
                         </form>

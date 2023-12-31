@@ -45,80 +45,47 @@
     }
 </style>
 <div class="row">
-        <div class="container py-2 my-5">
-            <div class="row text-center pb-4">
-                <div class="col-md-12">
-                    <h2 class="text-white siyah-cerceve">Books Platform </h2>
-                </div>
+    <div class="container py-2 my-5">
+        <div class="row text-center pb-4">
+            <div class="col-md-12">
+                <h2 class="text-white siyah-cerceve">Books Platform </h2>
             </div>
-            <div class="row">
-                <div class="col-md-12">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card fade-in acik-renk-form">
-                        <div class="card-body">
-                        <form method="get" asp-action="Index">
-
+                    <div class="card-body">
+                        <form id="searchForm" method="get" asp-action="Index">
+                            <!-- Search input -->
                             <div class="row">
                                 <div class="col-md-9">
-                                    <div class="form-group ">
-                                        <input type="search" value="@ViewData["getbookdetail"]" name="booksearch" class="form-control" placeholder="search book(any keywords)">
+                                    <div class="form-group">
+                                        <input type="search" value="@ViewData["getbookdetail"]" name="booksearch" class="form-control" placeholder="Search for books (any keywords)">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <button type="submit" value="Search" class="btn btn-warning  pl-5 pr-5">Search</button>
+                                    <button type="submit" value="Search" class="btn btn-warning pl-5 pr-5">Search</button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a class="btn btn-primary" asp-action="FilterNew">New</a>
+                                    <a class="btn btn-primary" asp-action="FilterUsed">Used</a>
+                                    <a class="btn btn-primary" asp-action="FilterAll">All</a>
                                 </div>
                             </div>
                         </form>
-
-                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
 
+    </div>
 
-
-    @foreach (var item in Model)
-    {
-        <div class="col-md-4 mb-3">
-            <div class="card fade-in">
-                <div class="card-header bg-info text-white">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="card-title">@item.BookTitle</span>
-                        <a class="text-white"><i class="bi bi-pencil-square"></i></a>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">@item.BookLanguage</p>
-                    <p class="card-text"><b>Author:</b> @item.BookAuthor</p>
-                    <p class="card-text"><b>Category:</b> @item.BookCategory</p>
-                    <a asp-action="Details" asp-controller="Users" asp-route-id="@item.User.UserId">
-                        <p class="card-text"><b>User Name:</b> @item.User.UserName</p>
-                    </a>
-                    <p class="card-text"><b>User City:</b> @item.User.UserCity</p>
-                    <p class="card-text"><b>Note:</b> @item.BookNotes</p>
-                    <p class="card-text">
-                        <b>Condition:</b>
-                        @if (item.BookCondition == "new")
-                        {
-                            <span class="badge bg-success text-white">NEW</span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-primary text-white">USED</span>
-                        }
-                    </p>
-                </div>
-                <div class="card-footer">
-                    <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.BookId">
-                        <i class="bi bi-eye-fill"></i> Show Details
-                    </a>
-                </div>
-            </div>
-        </div>
-    }
-
-
-
+    <!-- Displaying Book List using Partial View -->
+    <div class="row" id="bookListContainer">
+        @await Html.PartialAsync("_BookListPartial", Model)
+    </div>
 </div>
 

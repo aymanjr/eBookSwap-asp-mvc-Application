@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Book>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card fade-in">
+                <div class="card-header bg-info text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="card-title">@item.BookTitle</span>
+                        <a class="text-white"><i class="bi bi-pencil-square"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@item.BookLanguage</p>
+                    <p class="card-text"><b>Author:</b> @item.BookAuthor</p>
+                    <p class="card-text"><b>Category:</b> @item.BookCategory</p>
+
+                    @if (item.User != null)
+                    {
+                        <a asp-action="Details" asp-controller="Users" asp-route-id="@item.User.UserId">
+                            <p class="card-text"><b>User Name:</b> @item.User.UserName</p>
+                        </a>
+                        <p class="card-text"><b>User City:</b> @item.User.UserCity</p>
+                    }
+                    else
+                    {
+                        <p class="card-text"><b>User Name:</b> N/A</p>
+                        <p class="card-text"><b>User City:</b> N/A</p>
+                    }
+
+                    <p class="card-text"><b>Note:</b> @item.BookNotes</p>
+                    <p class="card-text">
+                        <b>Condition:</b>
+                        @if (item.BookCondition.ToLower() == "new")
+                        {
+                            <span class="badge bg-success text-white">NEW</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-primary text-white">USED</span>
+                        }
+                    </p>
+                </div>
+
+                <div class="card-footer">
+                    <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.BookId">
+                        <i class="bi bi-eye-fill"></i> Show Details
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

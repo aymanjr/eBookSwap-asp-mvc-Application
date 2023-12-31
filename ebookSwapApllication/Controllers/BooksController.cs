@@ -37,6 +37,9 @@ namespace ebookSwapApllication.Controllers
 
 
         }
+    
+
+
 
         [HttpGet]
         public async Task<IActionResult> Index(string booksearch)
@@ -63,7 +66,50 @@ namespace ebookSwapApllication.Controllers
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> FilterNew(string booksearch)
+        {
+            var bookquery = _context.Books.Include(n => n.User).Where(x => x.BookCondition == "new").AsQueryable();
 
+            if (!string.IsNullOrEmpty(booksearch))
+            {
+                bookquery = bookquery.Where(x => x.BookTitle.Contains(booksearch) || x.BookISBN13.Contains(booksearch) || x.BookAuthor.Contains(booksearch) || x.BookCategory.Contains(booksearch) || x.BookLanguage.Contains(booksearch) || x.User.UserCity.Contains(booksearch));
+            }
+
+            ViewData["getbookdetail"] = booksearch;
+
+            return View("Index", await bookquery.AsNoTracking().ToListAsync());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FilterUsed(string booksearch)
+        {
+            var bookquery = _context.Books.Include(n => n.User).Where(x => x.BookCondition == "used").AsQueryable();
+
+            if (!string.IsNullOrEmpty(booksearch))
+            {
+                bookquery = bookquery.Where(x => x.BookTitle.Contains(booksearch) || x.BookISBN13.Contains(booksearch) || x.BookAuthor.Contains(booksearch) || x.BookCategory.Contains(booksearch) || x.BookLanguage.Contains(booksearch) || x.User.UserCity.Contains(booksearch));
+            }
+
+            ViewData["getbookdetail"] = booksearch;
+
+            return View("Index", await bookquery.AsNoTracking().ToListAsync());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FilterAll(string booksearch)
+        {
+            var bookquery = _context.Books.Include(n => n.User).AsQueryable();
+
+            if (!string.IsNullOrEmpty(booksearch))
+            {
+                bookquery = bookquery.Where(x => x.BookTitle.Contains(booksearch) || x.BookISBN13.Contains(booksearch) || x.BookAuthor.Contains(booksearch) || x.BookCategory.Contains(booksearch) || x.BookLanguage.Contains(booksearch) || x.User.UserCity.Contains(booksearch));
+            }
+
+            ViewData["getbookdetail"] = booksearch;
+
+            return View("Index", await bookquery.AsNoTracking().ToListAsync());
+        }
 
         public async Task<IActionResult> Details(int? id)
         {
